@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainfragmentofnav"
+
+    app:startDestination="@id/home">
+
+    <fragment
+        android:id="@+id/home"
+
+        android:name="com.example.gpark.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.example.gpark.MapFragment"
+        android:label="Map"
+        tools:layout="@layout/fragment_map" />
+
+    <fragment
+        android:id="@+id/history"
+        android:name="com.example.gpark.HistoryFragment"
+        android:label="History"
+        tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/vip"
+        android:name="com.example.gpark.VipFragment"
+        android:label="VIP"
+        tools:layout="@layout/fragment_vip" />
+    <fragment
+        android:id="@+id/users"
+        android:name="com.example.gpark.UsersFragment"
+        android:label="User"
+        tools:layout="@layout/fragment_users" />
+    <fragment
+        android:id="@+id/detail"
+        android:name="com.example.gpark.DetailFragment"
+        android:label="Detail"
+        tools:layout="@layout/fragment_detail" />
+    <fragment
+        android:id="@+id/booking"
+        android:name="com.example.gpark.BookingFragment"
+        android:label="Booking"
+        tools:layout="@layout/fragment_booking" />
+</navigation>
