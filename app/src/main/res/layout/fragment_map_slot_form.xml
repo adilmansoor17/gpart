@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_10"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".BookingFragment">
+    android:background="@color/grey_10"
+    tools:context=".MapSlotFormFragment">
+
     <include
         android:id="@+id/include"
         layout="@layout/maintoolbar"
-        android:layout_width="match_parent"
+        android:layout_width="409dp"
         android:layout_height="46dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,7 +18,7 @@
 
 
     <ScrollView
-        android:layout_width="match_parent"
+        android:layout_width="413dp"
         android:layout_height="681dp"
         android:background="@color/brown_900"
         android:orientation="horizontal"
@@ -40,7 +41,7 @@
                 android:layout_marginTop="5dp"
                 android:fontFamily="serif"
                 android:gravity="center"
-                android:text="Book a Slot"
+                android:text="Generate Slots"
                 android:textColor="#F9F9FA"
                 android:textSize="25sp"
                 android:textStyle="bold"
@@ -65,18 +66,48 @@
                     android:background="@drawable/rounded_edittext"
                     android:ems="10"
                     android:fontFamily="serif"
-                    android:hint=" Map"
+                    android:hint=" Location"
                     android:inputType="textPersonName"
                     android:padding="10dp"
                     android:textColor="#fff"
                     android:textColorHint="#fff" />
 
+                <EditText
+                    android:id="@+id/editText_phnnumReg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="55dp"
+                    android:background="@drawable/rounded_edittext"
+                    android:ems="10"
+                    android:fontFamily="serif"
+                    android:hint=" Rows"
+                    android:inputType="textEmailAddress"
+                    android:padding="10dp"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff" />
+
+                <EditText
+                    android:id="@+id/editText_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="110dp"
+                    android:background="@drawable/rounded_edittext"
+                    android:ems="10"
+                    android:fontFamily="serif"
+                    android:hint=" Columns"
+                    android:inputType="textEmailAddress"
+                    android:padding="10dp"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/editText_nmfull"
-                    android:layout_marginTop="122dp"
+                    android:layout_marginTop="165dp"
                     android:background="@drawable/rounded_edittext"
                     android:orientation="horizontal">
 
@@ -127,17 +158,18 @@
 
                 </LinearLayout>
 
+
                 <EditText
                     android:id="@+id/editText_passwasdordsReg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="70dp"
+                    android:layout_marginTop="270dp"
                     android:background="@drawable/rounded_edittext"
                     android:ems="10"
                     android:fontFamily="serif"
-                    android:hint=" Number of Slot"
+                    android:hint=" No of Slots"
                     android:inputType="textPassword"
                     android:padding="10dp"
                     android:textColor="#fff"
@@ -165,8 +197,6 @@
 
 
     </ScrollView>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

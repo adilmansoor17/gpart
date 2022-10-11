@@ -44,4 +44,14 @@
         android:name="com.example.gpark.BookingFragment"
         android:label="Booking"
         tools:layout="@layout/fragment_booking" />
+    <fragment
+        android:id="@+id/bookingForm"
+        android:name="com.example.gpark.BookingFormFragment"
+        android:label="fragment_booking_form"
+        tools:layout="@layout/fragment_booking_form" />
+    <fragment
+        android:id="@+id/mapSlotForm"
+        android:name="com.example.gpark.MapSlotFormFragment"
+        android:label="MapGeneraion"
+        tools:layout="@layout/fragment_map_slot_form" />
 </navigation>

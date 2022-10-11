@@ -66,7 +66,7 @@ public class HomepageActivity extends AppCompatActivity implements NavigationVie
         switch(item.getItemId()){
             case R.id.home:
                 Toast.makeText(this,"home", Toast.LENGTH_SHORT);
-                    getSupportFragmentManager().beginTransaction().replace(R.id.navHostFragment,new HomeFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.navHostFragment,new HomeFragment()).commit();
                 break;
             case R.id.map:
                 Toast.makeText(this,"map", Toast.LENGTH_SHORT);
@@ -88,9 +88,14 @@ public class HomepageActivity extends AppCompatActivity implements NavigationVie
                 Toast.makeText(this,"detail", Toast.LENGTH_SHORT);
                 getSupportFragmentManager().beginTransaction().replace(R.id.navHostFragment,new DetailFragment()).commit();
                 break;
+
             case R.id.booking:
                 Toast.makeText(this,"booking", Toast.LENGTH_SHORT);
                 getSupportFragmentManager().beginTransaction().replace(R.id.navHostFragment,new BookingFragment()).commit();
+                break;
+            case R.id.mapSlotForm:
+                Toast.makeText(this,"mapSlotForm", Toast.LENGTH_SHORT);
+                getSupportFragmentManager().beginTransaction().replace(R.id.navHostFragment,new MapSlotFormFragment()).commit();
                 break;
             default: break;
         }
