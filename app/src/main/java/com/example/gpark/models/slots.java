@@ -9,6 +9,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -23,7 +25,37 @@ public class slots {
 
     private FirebaseAuth mAuth= FirebaseAuth.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseDatabase database = FirebaseDatabase.getInstance().getReference().getDatabase();
+    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
+    public void saveRealtimeSlotBook(){
+        mDatabase.child("slots").child(this.sensorID).setValue(this.getSlotInverseObject("true"));
+    }
+
+    public void saveRealtimeSlotFree(){
+        mDatabase.child("slots").child(this.sensorID).setValue(this.getSlotInverseObject("false"));
+    }
+
+    public Map getSlotObject(){
+        Map<String, Object> fuser = new HashMap<>();
+        fuser.put("map", this.map);
+        fuser.put("sensorID", this.sensorID);
+        fuser.put("slot", this.slot);
+        fuser.put("status",this.status);
+        fuser.put("user",this.user);
+        return fuser;
+    }
+
+    public Map getSlotInverseObject(String status){
+
+        Map<String, Object> fuser = new HashMap<>();
+        fuser.put("map", this.map);
+        fuser.put("sensorID", this.sensorID);
+        fuser.put("slot", this.slot);
+        fuser.put("status",status);
+        fuser.put("user",this.user);
+        return fuser;
+    }
 
     public boolean saveToDB() {
 
@@ -52,6 +84,8 @@ public class slots {
 
                     }
                 });
+
+
         return true;
 
 
@@ -141,10 +175,11 @@ public class slots {
                         }
                     }
                 });
-
+        this.saveRealtimeSlotFree();
     }
 
     public void bookSlot() {
+
         CollectionReference collection = db.collection("slots");
 
         collection.whereEqualTo("sensorID", this.sensorID)
@@ -164,5 +199,6 @@ public class slots {
             }
         });
 
+        this.saveRealtimeSlotBook();
     }
 }
