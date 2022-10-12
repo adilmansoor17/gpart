@@ -42,7 +42,7 @@
                 android:layout_marginTop="5dp"
                 android:fontFamily="serif"
                 android:gravity="center"
-                android:text="Personal Info"
+                android:text="Current Slots"
                 android:textColor="#F9F9FA"
                 android:textSize="25sp"
                 android:textStyle="bold"
@@ -50,22 +50,15 @@
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="111dp" />
 
-
-            <TextView
-                android:id="@+id/textView2z2"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recviewmap"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:fontFamily="serif"
-                android:gravity="center"
-                android:text="Current Parked Slots"
-                android:textColor="#F9F9FA"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="111dp" />
-
+                android:padding="15px"
+                android:layout_height="570dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include" />
 
         </LinearLayout>
 

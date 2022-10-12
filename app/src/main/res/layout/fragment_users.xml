@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/brown_900"
+    android:background="@color/grey_10"
     tools:context=".UsersFragment">
 
 
@@ -17,37 +17,51 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/usertestbutton1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:text="Add New"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recview"
-        app:layout_constraintVertical_bias="0.625" />
-
-    <Button
-        android:id="@+id/usertestbutton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="52dp"
-        android:text="usertest"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.837"
-        app:layout_constraintTop_toBottomOf="@+id/recview"
-        app:layout_constraintVertical_bias="0.625" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recview"
+    <ScrollView
         android:layout_width="match_parent"
-        android:padding="15px"
-        android:layout_height="570dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="681dp"
+        android:background="@color/brown_900"
+        android:orientation="horizontal"
+        android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include" />
+        app:layout_constraintTop_toBottomOf="@+id/include">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/textView2z"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="serif"
+                android:gravity="center"
+                android:text="Active Users"
+                android:textColor="#F9F9FA"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="111dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recview"
+                android:layout_width="match_parent"
+                android:padding="15px"
+                android:layout_height="570dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

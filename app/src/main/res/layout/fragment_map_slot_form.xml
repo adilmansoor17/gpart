@@ -58,7 +58,7 @@
                 android:padding="10dp">
 
                 <EditText
-                    android:id="@+id/editText_nmfull"
+                    android:id="@+id/location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -73,7 +73,7 @@
                     android:textColorHint="#fff" />
 
                 <EditText
-                    android:id="@+id/editText_phnnumReg"
+                    android:id="@+id/row"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -89,7 +89,7 @@
                     android:textColorHint="#fff" />
 
                 <EditText
-                    android:id="@+id/editText_add"
+                    android:id="@+id/col"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -127,7 +127,7 @@
                         android:textColorHint="#fff" />
 
                     <RadioGroup
-                        android:id="@+id/radioGrp"
+                        android:id="@+id/type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
@@ -135,7 +135,7 @@
                         android:paddingTop="5dp">
 
                         <RadioButton
-                            android:id="@+id/radioOne"
+                            android:id="@+id/vip"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="false"
@@ -145,7 +145,7 @@
                             android:textColor="#fff" />
 
                         <RadioButton
-                            android:id="@+id/radioTwo"
+                            android:id="@+id/user"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="false"
@@ -160,7 +160,7 @@
 
 
                 <EditText
-                    android:id="@+id/editText_passwasdordsReg"
+                    android:id="@+id/slots"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -177,7 +177,7 @@
 
 
                 <TextView
-                    android:id="@+id/button_regSave"
+                    android:id="@+id/button_slotSave"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="325dp"
