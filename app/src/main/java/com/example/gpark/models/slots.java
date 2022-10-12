@@ -4,18 +4,24 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class slots {
 
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mAuth= FirebaseAuth.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
@@ -106,6 +112,57 @@ public class slots {
         this.map = map;
         this.status = status;
         this.sensorID = sensorID;
-        this.user="";
+        this.user=mAuth.getCurrentUser().getUid();
+    }
+    public slots(String slot, String map, String status, String sensorID, String user) {
+        this.slot = slot;
+        this.map = map;
+        this.status = status;
+        this.sensorID = sensorID;
+        this.user=user;
+    }
+
+    public void freeSlot() {
+        CollectionReference collection = db.collection("slots");
+
+        collection.whereEqualTo("sensorID", this.sensorID)
+                .whereEqualTo("slot", this.slot)
+                .whereEqualTo("map", this.map)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Map<Object, String> map = new HashMap<>();
+                                map.put("status", "false");
+                                collection.document(document.getId()).set(map, SetOptions.merge());
+                                Log.wtf("my freeSlot click", "updated successfulyy");
+                            }
+                        }
+                    }
+                });
+
+    }
+
+    public void bookSlot() {
+        CollectionReference collection = db.collection("slots");
+
+        collection.whereEqualTo("sensorID", this.sensorID)
+                .whereEqualTo("slot", this.slot)
+                .whereEqualTo("map", this.map)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Map<Object, String> map = new HashMap<>();
+                        map.put("status", "true");
+                        collection.document(document.getId()).set(map, SetOptions.merge());
+                        Log.wtf("my bookSlot click", "updated successfulyy");
+                    }
+                }
+            }
+        });
+
     }
 }
