@@ -51,7 +51,7 @@ public class myMapadapter extends RecyclerView.Adapter<myMapadapter.myviewholder
             visibility_bk=View.VISIBLE;
             visibility_fr=View.GONE;
         }
-
+        Log.wtf("my status tag", status);
         holder.bk.setVisibility(visibility_bk);
         holder.fr.setVisibility(visibility_fr);
 
