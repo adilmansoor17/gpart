@@ -30,11 +30,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link BookingFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class BookingFragment extends Fragment {
 
     RecyclerView recview;

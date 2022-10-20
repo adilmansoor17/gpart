@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="8dp"
+    android:elevation="4dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="13dp">
+
+        <TextView
+            android:id="@+id/t11"
+            android:layout_width="84dp"
+            android:layout_height="wrap_content"
+            android:text="Name: "
+            android:textColor="#000"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/t1"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="65dp"
+            android:layout_marginTop="3dp"
+            android:text="Ahmad Yar"
+            android:textColor="#000"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/t22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/t1"
+            android:layout_marginTop="0dp"
+            android:text="Slot # "
+            android:textColor="#000"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/t2"
+            android:layout_width="88dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/t1"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="65dp"
+            android:layout_marginTop="2dp"
+            android:text="1"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/t3"
+            android:layout_width="86dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/t1"
+            android:layout_marginTop="21dp"
+            android:text="Time"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/imageview"
+            android:layout_width="132dp"
+            android:layout_height="35dp"
+            android:layout_above="@+id/t4"
+
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+
+
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="-17dp"
+            tools:srcCompat="@drawable/tick" />
+
+        <TextView
+            android:id="@+id/t4"
+            android:layout_width="135dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/t2"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="65dp"
+
+            android:text="17/10/2022 12:00"
+            android:textSize="12sp" />
+
+
+
+    </RelativeLayout>
+
+
+
+</androidx.cardview.widget.CardView>

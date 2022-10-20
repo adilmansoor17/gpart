@@ -2,46 +2,54 @@ package com.example.gpark;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DetailFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.gpark.models.booking;
+import com.example.gpark.models.slots;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class DetailFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    RecyclerView recview;
+    ArrayList<booking> datalist;
+    FirebaseFirestore db;
+    myBookingDetailadapter adapter;
+    FirebaseDatabase database = FirebaseDatabase.getInstance().getReference().getDatabase();
+    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public DetailFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DetailFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static DetailFragment newInstance(String param1, String param2) {
         DetailFragment fragment = new DetailFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -49,10 +57,7 @@ public class DetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -61,4 +66,50 @@ public class DetailFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_detail, container, false);
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        this.populateList();
+
+        view.findViewById(R.id.reload).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                populateList();
+            }
+        });
+
+    }
+
+    public void populateList() {
+
+        recview = (RecyclerView) getView().findViewById(R.id.recviewmap);
+        recview.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        datalist = new ArrayList<>();
+        adapter = new myBookingDetailadapter(datalist);
+        recview.setAdapter(adapter);
+
+        db = FirebaseFirestore.getInstance();
+        
+        db.collection("booking").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                        for (DocumentSnapshot d : list) {
+                            booking obj = d.toObject(booking.class);
+
+                            datalist.add(obj);
+                            adapter.notifyDataSetChanged();
+
+                        }
+                    }
+                });
+
+
+    }
+
 }
