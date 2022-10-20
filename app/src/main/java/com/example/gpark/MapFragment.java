@@ -120,12 +120,22 @@ public class MapFragment extends Fragment {
                                             e.printStackTrace();
                                         }
 
-                                        if (currentStatusJson.equals("free")) {
-                                            currentStatus = "false";
-                                            obj.setStatus(currentStatus);
-                                        } else if (currentStatusJson.equals("occupied")) {
-                                            currentStatus = "true";
-                                            obj.setStatus(currentStatus);
+                                        if(!obj.getStatus().equals("book")){
+                                            if (currentStatusJson.equals("free")) {
+                                                currentStatus = "false";
+                                                obj.setStatus(currentStatus);
+                                            } else if (currentStatusJson.equals("occupied")) {
+                                                currentStatus = "true";
+                                                obj.setStatus(currentStatus);
+                                            }
+                                            else{
+                                                obj.setStatus("book");
+                                            }
+                                        }else{
+                                            if (currentStatusJson.equals("occupied")) {
+                                                currentStatus = "true";
+                                                obj.setStatus(currentStatus);
+                                            }
                                         }
                                     }
                                     datalist.add(obj);

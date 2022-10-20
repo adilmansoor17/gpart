@@ -1,5 +1,7 @@
 package com.example.gpark;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,12 +17,15 @@ import android.view.ViewGroup;
 
 import com.example.gpark.models.booking;
 import com.example.gpark.models.slots;
+import com.example.gpark.models.users;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -93,7 +98,7 @@ public class DetailFragment extends Fragment {
         recview.setAdapter(adapter);
 
         db = FirebaseFirestore.getInstance();
-        
+
         db.collection("booking").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -102,8 +107,36 @@ public class DetailFragment extends Fragment {
                         for (DocumentSnapshot d : list) {
                             booking obj = d.toObject(booking.class);
 
-                            datalist.add(obj);
-                            adapter.notifyDataSetChanged();
+
+                            Log.wtf("user of idd",obj.getUser());
+
+                            db.collection("users")
+                                    .whereEqualTo("email", obj.getUser())
+                                    .get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            String name="Bhatti";
+
+                                            if (task.isSuccessful()) {
+                                                for (DocumentSnapshot document : task.getResult()) {
+                                                    Log.wtf(TAG, document.getId() + " => " + document.getData().get("fullname"));
+                                                    name=document.getData().get("fullname").toString();
+                                                }
+                                            } else {
+                                                Log.d(TAG, "Error getting documents: ", task.getException());
+                                            }
+
+                                            obj.setUser(name);
+
+                                            datalist.add(obj);
+                                            adapter.notifyDataSetChanged();
+                                        }
+                                    });
+
+
+
+
 
                         }
                     }

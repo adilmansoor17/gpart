@@ -49,6 +49,11 @@ public class users {
         return this.registrationnumber;
     }
 
+    public String getUserNameById(String ID){
+
+        return "Bhatti";
+    }
+
     public users(){}
 
     public users(

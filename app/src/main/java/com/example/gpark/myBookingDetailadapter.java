@@ -55,7 +55,7 @@ public class myBookingDetailadapter extends RecyclerView.Adapter<myBookingDetail
             id=R.drawable.info;
         }
 
-        holder.t1.setText(datalist.get(position).getUser().toString().split("8")[0]);
+        holder.t1.setText(datalist.get(position).getUser());
         holder.t2.setText(datalist.get(position).getSlot());
         holder.t4.setText(datalist.get(position).getTime().toString().split(" ")[0]);
         holder.IV.setImageResource(id);

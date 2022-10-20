@@ -80,7 +80,7 @@ public class booking {
         this.slot = slot;
         this.status = status;
         this.time = timestamp.toString();
-        this.user = mAuth.getCurrentUser().getUid();
+        this.user = mAuth.getCurrentUser().getEmail();
         this.id = id;
     }
 
