@@ -84,6 +84,25 @@ public class booking {
         this.id = id;
     }
 
+    public void removeBooking() {
+        CollectionReference collection = db.collection("booking");
+
+        collection.whereEqualTo("id", this.id)
+                .whereEqualTo("slot", this.slot)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Map<Object, String> map = new HashMap<>();
+                                map.put("status", "false");
+                                collection.document(document.getId()).set(map, SetOptions.merge());
+                                Log.wtf("my removeBooking click", "updated removeBooking successfulyy");
+                            }
+                        }
+                    }
+                });
+    }
 
     public boolean saveToDB() {
 

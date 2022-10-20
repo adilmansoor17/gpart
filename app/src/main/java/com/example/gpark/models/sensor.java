@@ -4,9 +4,14 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -18,6 +23,8 @@ public class sensor {
 
     private FirebaseAuth mAuth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseDatabase database = FirebaseDatabase.getInstance().getReference().getDatabase();
+    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
     public String getStatus() {
@@ -53,7 +60,60 @@ public class sensor {
     public sensor() {
 
     }
+    public String getSlotStatus(String SensorID){
 
+        mDatabase.child("private").child(SensorID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                }
+                else {
+                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
+                }
+            }
+        });
+        return "false";
+    }
+    public Map getSlotObject(){
+        String newStatusFree;
+        if(this.status=="free"){
+            newStatusFree="free";
+        }else{
+            newStatusFree="occupied";
+        }
+
+        Map<String, Object> fuser = new HashMap<>();
+        fuser.put("distance", 100);
+        fuser.put("status",newStatusFree);
+
+        return fuser;
+    }
+
+    public Map getSlotInverseObject(){
+
+        String newStatusFree;
+        if(this.status=="free"){
+            newStatusFree="occupied";
+        }else{
+            newStatusFree="free";
+        }
+
+        Map<String, Object> fuser = new HashMap<>();
+        fuser.put("distance", 100);
+        fuser.put("status",newStatusFree);
+
+        return fuser;
+    }
+
+    public void saveRealtimeSlotFree(boolean status){
+        if(!status){
+            mDatabase.child("private").child(this.slot).setValue(this.getSlotObject());
+        }else{
+            mDatabase.child("private").child(this.slot).setValue(this.getSlotInverseObject());
+        }
+
+    }
     public boolean saveToDB() {
 
         Map<String, Object> fuser = new HashMap<>();

@@ -40,12 +40,12 @@
         android:label="Detail"
         tools:layout="@layout/fragment_detail" />
     <fragment
-        android:id="@+id/booking"
+        android:id="@+id/bookingForm"
         android:name="com.example.gpark.BookingFragment"
         android:label="Booking"
         tools:layout="@layout/fragment_booking" />
     <fragment
-        android:id="@+id/bookingForm"
+        android:id="@+id/booking"
         android:name="com.example.gpark.BookingFormFragment"
         android:label="fragment_booking_form"
         tools:layout="@layout/fragment_booking_form" />

@@ -29,11 +29,11 @@ public class slots {
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
     public void saveRealtimeSlotBook(){
-        mDatabase.child("slots").child(this.sensorID).setValue(this.getSlotInverseObject("true"));
+        mDatabase.child("private").child(this.sensorID).setValue(this.getSlotInverseObject("true"));
     }
 
     public void saveRealtimeSlotFree(){
-        mDatabase.child("slots").child(this.sensorID).setValue(this.getSlotInverseObject("false"));
+        mDatabase.child("private").child(this.sensorID).setValue(this.getSlotInverseObject("false"));
     }
 
     public Map getSlotObject(){
@@ -175,7 +175,7 @@ public class slots {
                         }
                     }
                 });
-        this.saveRealtimeSlotFree();
+        //this.saveRealtimeSlotFree();
     }
 
     public void bookSlot() {
@@ -191,7 +191,7 @@ public class slots {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Map<Object, String> map = new HashMap<>();
-                        map.put("status", "true");
+                        map.put("status", "book");
                         collection.document(document.getId()).set(map, SetOptions.merge());
                         Log.wtf("my bookSlot click", "updated successfulyy");
                     }
@@ -199,6 +199,6 @@ public class slots {
             }
         });
 
-        this.saveRealtimeSlotBook();
+//        this.saveRealtimeSlotBook();
     }
 }

@@ -123,11 +123,12 @@ public class map {
 
         for(int i=0;i<Integer.parseInt(this.slot);i++){
 
-            slots newSlot = new slots(String.valueOf(i+1), this.location, "false",String.valueOf((1000+i)) );
+            slots newSlot = new slots(String.valueOf(i+1), this.location, "false","slot"+String.valueOf((i+1)) );
             newSlot.saveToDB();
 
-            sensor newSensor = new sensor("false", String.valueOf(i+1),String.valueOf((1000+i)) );
+            sensor newSensor = new sensor("free", "slot"+String.valueOf((i+1)),String.valueOf((i+1)) );
             newSensor.saveToDB();
+            newSensor.saveRealtimeSlotFree(false);
 
         }
 

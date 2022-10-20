@@ -54,12 +54,17 @@ public class myMapadapter extends RecyclerView.Adapter<myMapadapter.myviewholder
             status="Got";
             id=R.drawable.red_car;
             visibility_bk=View.GONE;
-            visibility_fr=View.VISIBLE;
-        }else{
+            visibility_fr=View.GONE;
+        }else if(status.toLowerCase().equals("false")){
             status="Free";
             id=R.drawable.gree_car;
             visibility_bk=View.VISIBLE;
             visibility_fr=View.GONE;
+        }else{
+            status="Booked";
+            id=R.drawable.blue_car;
+            visibility_bk=View.GONE;
+            visibility_fr=View.VISIBLE;
         }
 
         holder.bk.setVisibility(visibility_bk);
@@ -80,10 +85,11 @@ public class myMapadapter extends RecyclerView.Adapter<myMapadapter.myviewholder
 
                 booking newBooking=new booking(datalist.get(position).getSlot(), "true",datalist.get(position).getSensorID());
                 newBooking.saveToDB();
+
                 holder.bk.setVisibility(View.GONE);
                 holder.fr.setVisibility(View.VISIBLE);
-                holder.t2.setText("Free");
-                holder.IV.setImageResource(R.drawable.red_car);
+                holder.t2.setText("Booked");
+                holder.IV.setImageResource(R.drawable.blue_car);
 
                 slots newslot=new slots(datalist.get(position).getSlot(), datalist.get(position).getMap(),
                         datalist.get(position).getStatus(), datalist.get(position).getSensorID());
@@ -100,11 +106,14 @@ public class myMapadapter extends RecyclerView.Adapter<myMapadapter.myviewholder
                 Log.wtf("my status click", "free clicked");
                 holder.fr.setVisibility(View.GONE);
                 holder.bk.setVisibility(View.VISIBLE);
-                holder.t2.setText("Got");
+                holder.t2.setText("Free");
                 holder.IV.setImageResource(R.drawable.gree_car);
 
                 slots newslot=new slots(datalist.get(position).getSlot(), datalist.get(position).getMap(),
                         datalist.get(position).getStatus(), datalist.get(position).getSensorID());
+
+                booking newBooking=new booking(datalist.get(position).getSlot(), "false",datalist.get(position).getSensorID());
+                newBooking.removeBooking();
 
                 newslot.freeSlot();
 
