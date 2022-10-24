@@ -20,10 +20,10 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="681dp"
+        android:layout_height="690dp"
         android:background="@color/brown_900"
         android:orientation="horizontal"
-        android:padding="15dp"
+        android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include">
@@ -31,7 +31,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical"
             android:padding="5dp">
@@ -43,29 +43,75 @@
                 android:layout_marginTop="5dp"
                 android:fontFamily="serif"
                 android:gravity="center"
-                android:text="Current Slots"
+                android:text="All Slots"
                 android:textColor="#F9F9FA"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="111dp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recviewmap"
-                android:layout_width="match_parent"
-                android:layout_height="570dp"
-                android:padding="15px"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/include" />
-
-            <Button
-                android:id="@+id/reload"
+            <EditText
+                android:id="@+id/editText_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Reload" />
+
+
+                android:background="@drawable/rounded_edittext"
+
+                android:ems="10"
+                android:fontFamily="serif"
+                android:hint="Search Slot"
+                android:inputType="textEmailAddress"
+                android:padding="8dp"
+                android:textColor="#F9F9FA"
+                android:textColorHint="#F9F9FA" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="7dp">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recviewmap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="570dp"
+                        android:padding="3px"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/include" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recviewmap2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="570dp"
+                        android:padding="3px"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/include" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recviewmap3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="570dp"
+                        android:padding="3px"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/include" />
+
+
+                </LinearLayout>
+
+<!--            <Button-->
+<!--                android:id="@+id/reload"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Reload" />-->
 
         </LinearLayout>
 

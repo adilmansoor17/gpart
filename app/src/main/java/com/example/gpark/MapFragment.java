@@ -1,5 +1,6 @@
 package com.example.gpark;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.gpark.models.booking;
 import com.example.gpark.models.sensor;
 import com.example.gpark.models.slots;
 import com.example.gpark.models.users;
@@ -37,9 +39,12 @@ import java.util.List;
 
 public class MapFragment extends Fragment {
 
-    RecyclerView recview;
+    RecyclerView recview, recview2, recview3;
     ArrayList<slots> datalist;
+    ArrayList<sensor> datalistS, datalistS2, datalistS3;
+
     FirebaseFirestore db;
+    mySensorAdapter adapterS, adapterS2, adapterS3;
     myMapadapter adapter;
     FirebaseDatabase database = FirebaseDatabase.getInstance().getReference().getDatabase();
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -72,16 +77,16 @@ public class MapFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.populateList();
-
-        view.findViewById(R.id.reload).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                populateList();
-            }
-        });
+//        this.populateList();
+        this.populateRealTimeList();
+//        view.findViewById(R.id.reload).setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                populateRealTimeList();
+//            }
+//        });
 
     }
 
@@ -151,6 +156,104 @@ public class MapFragment extends Fragment {
 
 
     }
+
+    public void populateRealTimeList(){
+
+
+        mDatabase.child("private").addValueEventListener(
+                new ValueEventListener() {
+                    @SuppressLint("NotifyDataSetChanged")
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+
+                            recview = (RecyclerView) getView().findViewById(R.id.recviewmap);
+                            recview.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                            recview2 = (RecyclerView) getView().findViewById(R.id.recviewmap2);
+                            recview2.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                            recview3 = (RecyclerView) getView().findViewById(R.id.recviewmap3);
+                            recview3.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+                            datalist = new ArrayList<>();
+                            datalistS=new ArrayList<>();
+                            datalistS2=new ArrayList<>();
+                            datalistS3=new ArrayList<>();
+
+                            adapterS = new mySensorAdapter(datalistS);
+                            adapterS2 = new mySensorAdapter(datalistS2);
+                            adapterS3= new mySensorAdapter(datalistS3);
+
+                            recview.setAdapter(adapterS);
+                            recview2.setAdapter(adapterS2);
+                            recview3.setAdapter(adapterS3);
+
+
+
+                            if(snapshot.hasChildren()){
+                                long length=snapshot.getChildrenCount();
+                                int i=0;
+                                for (DataSnapshot d : snapshot.getChildren()) {
+                                    i++;
+                                    String id=d.getKey();
+                                    String status="---";
+                                    String key=d.getKey();
+                                    String slot="0";
+
+                                    if(key.length()==5){
+                                        slot= String.valueOf((d.getKey().toString()).charAt(4));
+
+                                    }else if(key.length()==6){
+                                        slot= String.valueOf((d.getKey().toString()).charAt(4)+
+                                                (d.getKey().toString()).charAt(5));
+                                    }else if(key.length()==7){
+                                        slot= String.valueOf((d.getKey().toString()).charAt(4)+
+                                                (d.getKey().toString()).charAt(5)+(d.getKey().toString()).charAt(6));
+                                    }
+
+
+                                    Object objO= d.getValue();
+
+                                    try {
+                                        JSONObject Json = new JSONObject(objO.toString());
+                                        status = Json.get("status").toString();
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+
+                                    sensor slotObj=new sensor(status, slot, id);
+
+                                    if((i%2==0)&&(i%5!=0)){
+                                        datalistS.add(slotObj);
+                                        adapterS.notifyDataSetChanged();
+                                    }else if((i%5==0)){
+                                        datalistS2.add(slotObj);
+                                        adapterS2.notifyDataSetChanged();
+                                    }else{
+                                        datalistS3.add(slotObj);
+                                        adapterS3.notifyDataSetChanged();
+                                    }
+
+
+
+                                    Log.wtf("realTime data", objO.toString());
+                                }
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                }
+        );
+    }
+
 }
 
 
