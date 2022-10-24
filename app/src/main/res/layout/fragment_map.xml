@@ -45,7 +45,7 @@
                 android:gravity="center"
                 android:text="All Slots"
                 android:textColor="#F9F9FA"
-                android:textSize="20sp"
+                android:textSize="21sp"
                 android:textStyle="bold"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="0dp"
@@ -63,7 +63,7 @@
                 android:fontFamily="serif"
                 android:hint="Search Slot"
                 android:inputType="textEmailAddress"
-                android:padding="8dp"
+                android:padding="6dp"
                 android:textColor="#F9F9FA"
                 android:textColorHint="#F9F9FA" />
 
@@ -72,7 +72,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:orientation="horizontal"
-                    android:padding="7dp">
+                    android:padding="10dp">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recviewmap"

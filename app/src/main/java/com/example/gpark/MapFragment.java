@@ -227,14 +227,14 @@ public class MapFragment extends Fragment {
                                     sensor slotObj=new sensor(status, slot, id);
 
                                     if((i%2==0)&&(i%5!=0)){
-                                        datalistS.add(slotObj);
-                                        adapterS.notifyDataSetChanged();
-                                    }else if((i%5==0)){
                                         datalistS2.add(slotObj);
                                         adapterS2.notifyDataSetChanged();
-                                    }else{
+                                    }else if((i%5==0)){
                                         datalistS3.add(slotObj);
                                         adapterS3.notifyDataSetChanged();
+                                    }else{
+                                        datalistS.add(slotObj);
+                                        adapterS.notifyDataSetChanged();
                                     }
 
 
