@@ -45,27 +45,27 @@
                 android:gravity="center"
                 android:text="All Slots"
                 android:textColor="#F9F9FA"
-                android:textSize="21sp"
+                android:textSize="23sp"
                 android:textStyle="bold"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="111dp" />
 
-            <EditText
-                android:id="@+id/editText_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+<!--            <EditText-->
+<!--                android:id="@+id/editText_email"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
 
 
-                android:background="@drawable/rounded_edittext"
+<!--                android:background="@drawable/rounded_edittext"-->
 
-                android:ems="10"
-                android:fontFamily="serif"
-                android:hint="Search Slot"
-                android:inputType="textEmailAddress"
-                android:padding="6dp"
-                android:textColor="#F9F9FA"
-                android:textColorHint="#F9F9FA" />
+<!--                android:ems="10"-->
+<!--                android:fontFamily="serif"-->
+<!--                android:hint="Search Slot"-->
+<!--                android:inputType="textEmailAddress"-->
+<!--                android:padding="6dp"-->
+<!--                android:textColor="#F9F9FA"-->
+<!--                android:textColorHint="#F9F9FA" />-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
