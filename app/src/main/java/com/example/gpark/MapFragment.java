@@ -206,11 +206,16 @@ public class MapFragment extends Fragment {
                                         slot= String.valueOf((d.getKey().toString()).charAt(4));
 
                                     }else if(key.length()==6){
-                                        slot= String.valueOf((d.getKey().toString()).charAt(4)+
-                                                (d.getKey().toString()).charAt(5));
+                                        slot= String.valueOf(
+                                                (Integer.parseInt(String.valueOf((d.getKey()).charAt(4)))*10)+
+                                                        Integer.parseInt(String.valueOf((d.getKey()).charAt(5)))
+                                        );
                                     }else if(key.length()==7){
-                                        slot= String.valueOf((d.getKey().toString()).charAt(4)+
-                                                (d.getKey().toString()).charAt(5)+(d.getKey().toString()).charAt(6));
+                                        slot= String.valueOf(
+                                                (Integer.parseInt(String.valueOf((d.getKey()).charAt(4)))*100)+
+                                                        (Integer.parseInt(String.valueOf((d.getKey()).charAt(5)))*10)+
+                                                        Integer.parseInt(String.valueOf((d.getKey()).charAt(6)))
+                                        );
                                     }
 
 
