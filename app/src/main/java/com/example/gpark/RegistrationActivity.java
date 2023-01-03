@@ -32,7 +32,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     private RadioGroup radioGroup;
     private RadioButton radioButton;
     private TextView vhl_type;
-    private String vehicleType = null;
+    private String vehicleType = "Student";
     private FirebaseAuth mAuth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -60,20 +60,17 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
 
-
-
-
         switch (v.getId()){
             case R.id.button_regdffdisterLogIn:
                 startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
                 Toast.makeText(getApplicationContext(), "Clicked on Need to LogIn",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.radioOne:
-                vehicleType="Car";
+                vehicleType="Faculty";
                 Toast.makeText(getApplicationContext(), vehicleType,Toast.LENGTH_SHORT).show();
                 break;
             case R.id.radioTwo:
-                vehicleType="Bike";
+                vehicleType="Student";
                 Toast.makeText(getApplicationContext(), vehicleType,Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_regSave:
@@ -130,6 +127,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                                 fuser.put("fullname", fullName);
                                 fuser.put("phonenumber", phnNum);
                                 fuser.put("email", address);
+                                fuser.put("user_type", vehicleType);
                                 fuser.put("registrationnumber",vehicleRegNo);
 
                                 db.collection("users")

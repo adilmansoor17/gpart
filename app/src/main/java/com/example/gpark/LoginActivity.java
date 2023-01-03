@@ -73,8 +73,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             pass.setError("Password!");
             pass.requestFocus();
             return;
-        }else if (passw.length()<5){
-            pass.setError("Password length should be 5 or more!");
+        }else if (passw.length()<6){
+            pass.setError("Password length should be 6 or more!");
             pass.requestFocus();
             return;
         }else if (!email.matches(emailPattern)){

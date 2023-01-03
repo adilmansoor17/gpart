@@ -31,7 +31,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
     @Override
     public void onBindViewHolder(@NonNull myviewholder holder, int position) {
         holder.t1.setText(datalist.get(position).getName());
-        holder.t2.setText(datalist.get(position).getEmail());
+        holder.t2.setText(datalist.get(position).getuser_type());
         holder.t3.setText(datalist.get(position).getPhone());
         holder.t4.setText(datalist.get(position).getreg());
 

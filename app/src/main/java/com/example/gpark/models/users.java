@@ -23,9 +23,10 @@ public class users {
 
     public String email;
     public String fullname;
+    public String name;
     public String phonenumber;
     public String registrationnumber;
-
+    public String user_type;
     public String id;
 
     public String statuss;
@@ -45,6 +46,10 @@ public class users {
         return this.phonenumber;
     }
 
+    public String getuser_type(){
+        return this.user_type;
+    }
+
     public String getreg(){
         return this.registrationnumber;
     }
@@ -60,7 +65,8 @@ public class users {
             String email,
             String fullname,
             String phonenumber,
-            String registrationnumber
+            String registrationnumber,
+            String user_type
     ){
         this.statuss="VIP";
         mAuth = FirebaseAuth.getInstance();
@@ -68,9 +74,9 @@ public class users {
         this.fullname=fullname;
         this.phonenumber=phonenumber;
         this.registrationnumber=registrationnumber;
-
+        this.user_type=user_type;
         this.savetoDb();
-
+        this.name=fullname;
     }
 
     public void assignUser(
@@ -94,6 +100,7 @@ public class users {
         fuser.put("phonenumber", this.phonenumber);
         fuser.put("email", this.email);
         fuser.put("registrationnumber",this.registrationnumber);
+        fuser.put("user_type", this.user_type);
 
         db.collection("users")
                 .add(fuser)

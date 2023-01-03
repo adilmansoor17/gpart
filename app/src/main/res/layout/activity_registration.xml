@@ -109,15 +109,15 @@
 
                 <TextView
                     android:id="@+id/editTexat_passwosardsLogIn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="122dp"
+                    android:layout_height="match_parent"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="left"
                     android:drawableLeft="@drawable/ic_pass"
                     android:ems="10"
                     android:fontFamily="serif"
-                    android:hint=" Vehicle "
+                    android:hint=" User Type "
                     android:padding="10dp"
                     android:textColor="#fff"
                     android:textColorHint="#fff" />
@@ -129,30 +129,32 @@
                     android:layout_gravity="right"
                     android:paddingTop="5dp"
                     android:orientation="horizontal">
+
                     <RadioButton
                         android:id="@+id/radioOne"
-                        android:layout_width="wrap_content"
+                        android:layout_width="104dp"
                         android:layout_height="wrap_content"
                         android:checked="false"
                         android:fontFamily="serif"
-                        android:textColor="#fff"
                         android:paddingLeft="5dp"
-                        android:text="Car"/>
+                        android:text="Faculty"
+                        android:textColor="#fff" />
 
                     <RadioButton
                         android:id="@+id/radioTwo"
-                        android:layout_width="wrap_content"
+                        android:layout_width="129dp"
                         android:layout_height="wrap_content"
                         android:checked="false"
                         android:fontFamily="serif"
                         android:paddingLeft="5dp"
-                        android:textColor="#fff"
-                        android:text="Bike"/>
+                        android:text="Student"
+                        android:textColor="#fff" />
                 </RadioGroup>
 
 
 
             </LinearLayout>
+
 
             <EditText
                 android:id="@+id/editText_VehicleRegNum"

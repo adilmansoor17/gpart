@@ -64,10 +64,7 @@ public class HomepageActivity extends AppCompatActivity implements NavigationVie
         Toast.makeText(this,"Click on list", Toast.LENGTH_SHORT);
 
         switch(item.getItemId()){
-            case R.id.home:
-                Toast.makeText(this,"home", Toast.LENGTH_SHORT);
-                getSupportFragmentManager().beginTransaction().replace(R.id.navHostFragment,new HomeFragment()).commit();
-                break;
+
             case R.id.map:
                 Toast.makeText(this,"map", Toast.LENGTH_SHORT);
                 getSupportFragmentManager().beginTransaction().replace(R.id.navHostFragment,new MapFragment()).commit();

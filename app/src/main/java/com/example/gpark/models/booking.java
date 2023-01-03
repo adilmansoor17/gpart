@@ -74,6 +74,16 @@ public class booking {
         this.id = id;
     }
 
+    public booking(String slot, String status, String id, String User) {
+        Date date = new Date();
+        Timestamp timestamp = new Timestamp(date.getTime());
+        this.slot = slot;
+        this.status = status;
+        this.time = timestamp.toString();
+        this.user = User;
+        this.id = id;
+    }
+
     public booking(String slot, String status, String id) {
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
