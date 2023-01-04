@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/brown_900"
+    android:background="#F9F9FA"
     tools:context=".BookingFragment">
 
 
@@ -22,7 +22,7 @@
                 android:fontFamily="serif"
                 android:gravity="center"
                 android:text="Reserve For Faculty"
-                android:textColor="#F9F9FA"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 tools:ignore="MissingConstraints"
@@ -33,7 +33,7 @@
 
             <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="200px"
+                android:layout_height="100px"
                 android:id="@+id/spinner"
                 />
 
