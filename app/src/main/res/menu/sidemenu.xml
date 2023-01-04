@@ -11,18 +11,7 @@
             android:layout_height="wrap_content"
             android:icon="@drawable/parking_final_logo"
             android:title="Slots" />
-<!--        <item-->
-<!--            android:id="@+id/history"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:icon="@drawable/ic_baseline_history_24"-->
-<!--            android:title="History" />-->
-<!--        <item-->
-<!--            android:id="@+id/vip"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:icon="@drawable/ic_user_name"-->
-<!--            android:title="VIP" />-->
+
         <item
             android:id="@+id/mapSlotForm"
             android:layout_width="wrap_content"

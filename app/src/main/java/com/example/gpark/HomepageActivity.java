@@ -29,7 +29,15 @@ public class HomepageActivity extends AppCompatActivity implements NavigationVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homepage);
+
+        Boolean faculty=false, admin=false;
+        if(admin){
+            setContentView(R.layout.activity_homepage);
+        }else if(faculty){
+            setContentView(R.layout.activity_homepage_faculty);
+        }else{
+            setContentView(R.layout.activity_homepage_student);
+        }
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
