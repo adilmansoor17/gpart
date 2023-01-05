@@ -2,6 +2,7 @@ package com.example.gpark;
 
 import static com.google.android.gms.common.util.CollectionUtils.setOf;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -26,11 +27,32 @@ public class HomepageActivity extends AppCompatActivity implements NavigationVie
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
+    boolean faculty=false, admin=false;
+
+    String getUser_type(){
+        if(faculty)
+        return "Faculty";
+        else if(admin)
+            return "Admin";
+        else return "Student";
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Boolean faculty=true, admin=false;
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String value = extras.getString("user_type");
+            if(value.equals("Faculty")){
+                faculty=true;
+                admin=false;
+            }else if(value.equals("Admin")){
+                faculty=false;
+                admin=true;
+            }
+        }
+
         if(admin){
             setContentView(R.layout.activity_homepage);
         }else if(faculty){
@@ -48,13 +70,9 @@ public class HomepageActivity extends AppCompatActivity implements NavigationVie
 
         NavController navController = Navigation.findNavController(this, R.id.navHostFragment);
 
-
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_open,R.string.navigation_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-
-
-
 
     }
 
@@ -67,23 +85,23 @@ public class HomepageActivity extends AppCompatActivity implements NavigationVie
         }
     }
 
+    @SuppressLint({"NonConstantResourceId", "ShowToast"})
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Toast.makeText(this,"Click on list", Toast.LENGTH_SHORT);
+        Toast.makeText(this,"Click on list", Toast.LENGTH_SHORT).show();
 
         switch(item.getItemId()){
 
             case R.id.map:
+
+                Bundle bundle = new Bundle();
+                String myMessage = getUser_type();
+                bundle.putString("user_type", myMessage );
+                MapFragment fragInfo = new MapFragment();
+                fragInfo.setArguments(bundle);
+
                 Toast.makeText(this,"map", Toast.LENGTH_SHORT);
-                getSupportFragmentManager().beginTransaction().replace(R.id.navHostFragment,new MapFragment()).commit();
-                break;
-            case R.id.history:
-                Toast.makeText(this,"history", Toast.LENGTH_SHORT);
-                getSupportFragmentManager().beginTransaction().replace(R.id.navHostFragment,new HistoryFragment()).commit();
-                break;
-            case R.id.vip:
-                Toast.makeText(this,"vip", Toast.LENGTH_SHORT);
-                getSupportFragmentManager().beginTransaction().replace(R.id.navHostFragment,new VipFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.navHostFragment,fragInfo).commit();
                 break;
             case R.id.users:
                 Toast.makeText(this,"users", Toast.LENGTH_SHORT);
@@ -100,6 +118,7 @@ public class HomepageActivity extends AppCompatActivity implements NavigationVie
                 break;
             case R.id.mapSlotForm:
                 Toast.makeText(this,"mapSlotForm", Toast.LENGTH_SHORT);
+
                 getSupportFragmentManager().beginTransaction().replace(R.id.navHostFragment,new MapSlotFormFragment()).commit();
                 break;
             default: break;

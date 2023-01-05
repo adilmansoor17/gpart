@@ -73,7 +73,9 @@ public class myMapadapter extends RecyclerView.Adapter<myMapadapter.myviewholder
     @Override
     public void onBindViewHolder(@NonNull myviewholder holder, @SuppressLint("RecyclerView") int position) {
         String status=datalist.get(position).getStatus();
-        Boolean admin=false;
+
+
+        boolean admin=false;
         int id;
         int visibility_bk;
         int visibility_fr;

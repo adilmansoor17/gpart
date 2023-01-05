@@ -1,5 +1,7 @@
 package com.example.gpark;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,17 +13,27 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.gpark.models.users;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ProgressDialog progressDialog;
     private EditText emmail, pass;
     private FirebaseAuth mAuth;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 //    FirebaseUser currentUser = mAuth.getCurrentUser();
 
 
@@ -93,11 +105,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 Toast.makeText(LoginActivity.this, "Authentication successful.",
                                         Toast.LENGTH_SHORT).show();
 
+                                db.collection("users")
+                                        .whereEqualTo("email", user.getEmail())
+                                        .get()
+                                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                                List<DocumentSnapshot> list=queryDocumentSnapshots.getDocuments();
+                                                for(DocumentSnapshot d:list)
+                                                {
+                                                    users obj=d.toObject(users.class);
+
+                                                    Log.d("TAG", "res:success"+obj.getuser_type());
+                                                    Intent intent = new Intent(LoginActivity.this,HomepageActivity.class);
+                                                    intent.putExtra("user_type",obj.getuser_type());
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+
+                                            }
+                                        });
+
                                 //
 
-                                Intent intent = new Intent(LoginActivity.this,HomepageActivity.class);
-                                startActivity(intent);
-                                finish();
+
                                 //updateUI(user);
                             } else {
                                 // If sign in fails, display a message to the user.
