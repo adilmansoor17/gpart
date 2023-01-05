@@ -71,7 +71,6 @@ public class MapFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        String user_type = this.getArguments().getString("user_type");
         return inflater.inflate(R.layout.fragment_map, container, false);
     }
 

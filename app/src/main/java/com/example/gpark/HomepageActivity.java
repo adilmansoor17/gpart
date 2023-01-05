@@ -93,15 +93,8 @@ public class HomepageActivity extends AppCompatActivity implements NavigationVie
         switch(item.getItemId()){
 
             case R.id.map:
-
-                Bundle bundle = new Bundle();
-                String myMessage = getUser_type();
-                bundle.putString("user_type", myMessage );
-                MapFragment fragInfo = new MapFragment();
-                fragInfo.setArguments(bundle);
-
                 Toast.makeText(this,"map", Toast.LENGTH_SHORT);
-                getSupportFragmentManager().beginTransaction().replace(R.id.navHostFragment,fragInfo).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.navHostFragment,new MapFragment()).commit();
                 break;
             case R.id.users:
                 Toast.makeText(this,"users", Toast.LENGTH_SHORT);
