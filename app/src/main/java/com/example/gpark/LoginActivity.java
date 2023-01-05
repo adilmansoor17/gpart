@@ -92,6 +92,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 Toast.makeText(LoginActivity.this, "Authentication successful.",
                                         Toast.LENGTH_SHORT).show();
+
+                                //
+
                                 Intent intent = new Intent(LoginActivity.this,HomepageActivity.class);
                                 startActivity(intent);
                                 finish();

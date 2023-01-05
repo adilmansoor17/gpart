@@ -17,6 +17,11 @@
             android:icon="@drawable/ic_baseline_history_24"
             android:title="Booking Detail" />
 
-
+        <item
+            android:id="@+id/booking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/parking_final_logo"
+            android:title="Booking" />
     </group>
 </menu>

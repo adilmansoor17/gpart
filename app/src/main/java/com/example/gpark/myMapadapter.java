@@ -73,6 +73,7 @@ public class myMapadapter extends RecyclerView.Adapter<myMapadapter.myviewholder
     @Override
     public void onBindViewHolder(@NonNull myviewholder holder, @SuppressLint("RecyclerView") int position) {
         String status=datalist.get(position).getStatus();
+        Boolean admin=false;
         int id;
         int visibility_bk;
         int visibility_fr;
@@ -91,7 +92,11 @@ public class myMapadapter extends RecyclerView.Adapter<myMapadapter.myviewholder
             status="Booked";
             id=R.drawable.blue_car;
             visibility_bk=View.GONE;
-            visibility_fr=View.VISIBLE;
+            if(admin){
+                visibility_fr=View.VISIBLE;
+            }else{
+                visibility_fr=View.GONE;
+            }
         }
 
         holder.bk.setVisibility(visibility_bk);
@@ -113,53 +118,62 @@ public class myMapadapter extends RecyclerView.Adapter<myMapadapter.myviewholder
                 Log.wtf("my status click", "book clicked");
 
 
-                ////    add dialog with user type faculty,   and select from drop down
-                ////    display only selected user slot for booking details
-                ////    show booking details and slots to faculty
-                ////    show slots to students
 
-                final AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext());
-                View view = View.inflate(v.getContext(),R.layout.user_dropdown_dialog, null);
-                final TextView text=(TextView) view.findViewById(R.id.textView2z);
-                final Button book=(Button) view.findViewById(R.id.btn_book);
-                alert.setView(view);
+                if(admin){
+                    final AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext());
+                    View view = View.inflate(v.getContext(),R.layout.user_dropdown_dialog, null);
+                    final TextView text=(TextView) view.findViewById(R.id.textView2z);
+                    final Button book=(Button) view.findViewById(R.id.btn_book);
+                    alert.setView(view);
 
-                final Spinner spinner =(Spinner) view.findViewById(R.id.spinner);
-                menuAdapter madapter;
-                madapter = new menuAdapter(v.getContext(),userDatalist);
-//                madapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinner.setAdapter(madapter);
+                    final Spinner spinner =(Spinner) view.findViewById(R.id.spinner);
+                    menuAdapter madapter;
+                    madapter = new menuAdapter(v.getContext(),userDatalist);
+                    spinner.setAdapter(madapter);
 
-                final AlertDialog alertDialog = alert.create();
-                alertDialog.setCanceledOnTouchOutside(true);
-                book.setOnClickListener(
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                users user = (users) spinner.getSelectedItem();
-                                Log.wtf("my status inside click", "book inside clicked : "+user.getEmail());
-                                email=user.getEmail();
-                                booking newBooking=new booking(datalist.get(position).getSlot(), "true",datalist.get(position).getSensorID(),email);
-                                newBooking.saveToDB();
-                                alertDialog.dismiss();
+                    final AlertDialog alertDialog = alert.create();
+                    alertDialog.setCanceledOnTouchOutside(true);
+                    book.setOnClickListener(
+                            new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    users user = (users) spinner.getSelectedItem();
+                                    Log.wtf("my status inside click", "book inside clicked : "+user.getEmail());
+                                    email=user.getEmail();
+                                    booking newBooking=new booking(datalist.get(position).getSlot(), "true",datalist.get(position).getSensorID(),email);
+                                    newBooking.saveToDB();
+                                    alertDialog.dismiss();
 
 
-                                holder.bk.setVisibility(View.GONE);
-                                holder.fr.setVisibility(View.VISIBLE);
-                                holder.t2.setText("Booked");
-                                holder.IV.setImageResource(R.drawable.blue_car);
+                                    holder.bk.setVisibility(View.GONE);
+                                    holder.fr.setVisibility(View.VISIBLE);
+                                    holder.t2.setText("Booked");
+                                    holder.IV.setImageResource(R.drawable.blue_car);
 
-                                slots newslot=new slots(datalist.get(position).getSlot(), datalist.get(position).getMap(),
-                                        datalist.get(position).getStatus(), datalist.get(position).getSensorID());
+                                    slots newslot=new slots(datalist.get(position).getSlot(), datalist.get(position).getMap(),
+                                            datalist.get(position).getStatus(), datalist.get(position).getSensorID());
 
-                                newslot.bookSlot();
+                                    newslot.bookSlot();
 
 
-
+                                }
                             }
-                        }
-                );
-                alertDialog.show();
+                    );
+                    alertDialog.show();
+                }else{
+                    booking newBooking=new booking(datalist.get(position).getSlot(), "true",datalist.get(position).getSensorID(),email);
+                    newBooking.saveToDB();
+
+                    holder.bk.setVisibility(View.GONE);
+                    holder.fr.setVisibility(View.GONE);
+                    holder.t2.setText("Booked");
+                    holder.IV.setImageResource(R.drawable.blue_car);
+
+                    slots newslot=new slots(datalist.get(position).getSlot(), datalist.get(position).getMap(),
+                            datalist.get(position).getStatus(), datalist.get(position).getSensorID());
+
+                    newslot.bookSlot();
+                }
 
 
             }

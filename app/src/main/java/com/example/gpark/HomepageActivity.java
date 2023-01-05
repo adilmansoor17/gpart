@@ -30,7 +30,7 @@ public class HomepageActivity extends AppCompatActivity implements NavigationVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Boolean faculty=false, admin=false;
+        Boolean faculty=true, admin=false;
         if(admin){
             setContentView(R.layout.activity_homepage);
         }else if(faculty){
